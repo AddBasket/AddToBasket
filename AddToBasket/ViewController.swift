@@ -21,6 +21,13 @@ class ViewController: UIViewController {
         collectionview.dataSource = self
         
         downloadInformation()
+        
+       
+        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .vertical
+//        layout.minimumLineSpacing = 5
+//        layout.minimumInteritemSpacing = 5
+        collectionview.setCollectionViewLayout(layout, animated: true)
         // Do any additional setup after loading the view.
     }
 
@@ -65,8 +72,17 @@ class ViewController: UIViewController {
        }
 }
 
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout
 {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let gridLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let widthPerItem = collectionView.frame.width / 2 - 10
+        return CGSize(width:widthPerItem, height:collectionview.frame.height/3)
+    }
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int
     {
@@ -90,7 +106,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate
         cell?.productPrice_lbl.text = productList[indexPath.row].price + "  " + productList[indexPath.row].currency
         
 //        cell!.backgroundColor = UIColor.white
-        cell!.layer.borderColor = UIColor.black.cgColor
+        cell!.layer.borderColor = UIColor.systemGray.cgColor
         cell!.layer.borderWidth = 1
 //        cell!.layer.cornerRadius = 8
         cell?.layer.masksToBounds
@@ -149,24 +165,24 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate
     
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout
-{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        let gridLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        let widthPerItem = collectionView.frame.width / 2
-        let heightPerItem = widthPerItem
-       
-        return CGSize(width:widthPerItem, height:heightPerItem)
-        
-        
-        //        let bounds = collectionView.bounds
-        //        // let width = self.view.frame.width - 16.0 * 2
-        //        // let height: CGFloat = 234.0
-        //
-        //        return CGSize(width: bounds.width/4, height: bounds.height/4)
-    }
-}
+//extension ViewController: UICollectionViewDelegateFlowLayout
+//{
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+//    {
+//        let gridLayout = collectionViewLayout as! UICollectionViewFlowLayout
+//        let widthPerItem = collectionView.frame.width / 2
+//        let heightPerItem = widthPerItem
+//
+//        return CGSize(width:widthPerItem, height:heightPerItem)
+//
+//
+//        //        let bounds = collectionView.bounds
+//        //        // let width = self.view.frame.width - 16.0 * 2
+//        //        // let height: CGFloat = 234.0
+//        //
+//        //        return CGSize(width: bounds.width/4, height: bounds.height/4)
+//    }
+//}
 
 
 

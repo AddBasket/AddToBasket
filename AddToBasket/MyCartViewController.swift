@@ -32,6 +32,10 @@ class MyCartViewController: UIViewController {
         super.viewDidLoad()
         myCartTableView.delegate = self
         myCartTableView.dataSource = self
+        titel_lbl.layer.borderWidth = 1
+        titel_lbl.layer.borderColor = UIColor.gray.cgColor
+        titel_lbl.clipsToBounds = true
+      
         titel_lbl.text = "My Cart" + "(" + String(userdefaultsProductList.count) + ")"
        
         myCartTableView.tableFooterView=UIView();
